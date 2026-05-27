@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "flavor-is-enough-mod:item/warning_card"
+  }
+}

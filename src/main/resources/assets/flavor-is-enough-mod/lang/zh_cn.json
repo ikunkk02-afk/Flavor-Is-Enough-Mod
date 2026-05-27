@@ -1,0 +1,13 @@
+{
+  "item.flavor-is-enough-mod.flavor_snack": "味真足小零食",
+  "item.flavor-is-enough-mod.big_stomach_bun": "大胃袋包子",
+  "item.flavor-is-enough-mod.oily_meat": "油腻肉块",
+  "item.flavor-is-enough-mod.health_leaf": "健康叶",
+  "item.flavor-is-enough-mod.measuring_tape": "体态测量尺",
+  "item.flavor-is-enough-mod.warning_card": "健康提示卡",
+  "itemGroup.flavor-is-enough-mod.main": "味真足模组",
+  "category.flavor-is-enough-mod": "味真足模组",
+  "key.flavor-is-enough-mod.toggle_hud": "切换味真足 HUD",
+  "key.flavor-is-enough-mod.edit_hud": "编辑味真足 HUD",
+  "screen.flavor-is-enough-mod.hud_editor": "味真足 HUD 编辑"
+}

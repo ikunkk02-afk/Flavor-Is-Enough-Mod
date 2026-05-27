@@ -1,0 +1,13 @@
+{
+  "item.flavor-is-enough-mod.flavor_snack": "Flavor Snack",
+  "item.flavor-is-enough-mod.big_stomach_bun": "Big Stomach Bun",
+  "item.flavor-is-enough-mod.oily_meat": "Oily Meat",
+  "item.flavor-is-enough-mod.health_leaf": "Health Leaf",
+  "item.flavor-is-enough-mod.measuring_tape": "Measuring Tape",
+  "item.flavor-is-enough-mod.warning_card": "Warning Card",
+  "itemGroup.flavor-is-enough-mod.main": "Flavor Is Enough Mod",
+  "category.flavor-is-enough-mod": "Flavor Is Enough Mod",
+  "key.flavor-is-enough-mod.toggle_hud": "Toggle Flavor Is Enough HUD",
+  "key.flavor-is-enough-mod.edit_hud": "Edit Flavor Is Enough HUD",
+  "screen.flavor-is-enough-mod.hud_editor": "Flavor Is Enough HUD Editor"
+}
