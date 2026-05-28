@@ -1,6 +1,8 @@
 package com.ikunkk02.flavorisenough.item;
 
 import com.ikunkk02.flavorisenough.health.FlavorHealthApplier;
+import com.ikunkk02.flavorisenough.sound.ModSounds;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,6 +29,9 @@ public class FlavorFoodItem extends Item {
 
 		if (!level.isClientSide() && livingEntity instanceof Player player) {
 			FlavorHealthApplier.apply(player, flavorChange, obesityChange, healthChange, stomachLoadChange, false);
+			if (this != ModItems.HEALTH_LEAF) {
+				level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.EASTER_FOOD, SoundSource.PLAYERS, 1.0F, 1.0F);
+			}
 		}
 
 		return result;

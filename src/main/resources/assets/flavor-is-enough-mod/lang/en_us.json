@@ -9,5 +9,6 @@
   "category.flavor-is-enough-mod": "Flavor Is Enough Mod",
   "key.flavor-is-enough-mod.toggle_hud": "Toggle Flavor Is Enough HUD",
   "key.flavor-is-enough-mod.edit_hud": "Edit Flavor Is Enough HUD",
-  "screen.flavor-is-enough-mod.hud_editor": "Flavor Is Enough HUD Editor"
+  "screen.flavor-is-enough-mod.hud_editor": "Flavor Is Enough HUD Editor",
+  "screen.flavor-is-enough-mod.hud_editor.instructions": "Left-drag the panel | Scroll to resize | ESC saves and closes"
 }

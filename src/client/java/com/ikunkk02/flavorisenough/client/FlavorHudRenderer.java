@@ -98,12 +98,12 @@ public final class FlavorHudRenderer {
 		clampHudToScreen(context.guiWidth(), context.guiHeight(), true);
 
 		FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(client.player);
-		renderPanel(context, config.getHudX(), config.getHudY(), component);
+		renderPanelScaled(context, config.getHudX(), config.getHudY(), config.getHudScale(), component);
 	}
 
 	public static boolean clampHudToScreen(int screenWidth, int screenHeight, boolean save) {
 		FlavorClientConfig config = FlavorClientConfig.get();
-		boolean changed = config.clampHudPosition(screenWidth, screenHeight, PANEL_WIDTH, PANEL_HEIGHT);
+		boolean changed = config.clampHudPosition(screenWidth, screenHeight, getScaledPanelWidth(), getScaledPanelHeight());
 		if (changed && save) {
 			config.save();
 		}
@@ -113,15 +113,38 @@ public final class FlavorHudRenderer {
 	public static boolean isInsidePanel(double mouseX, double mouseY) {
 		FlavorClientConfig config = FlavorClientConfig.get();
 		return mouseX >= config.getHudX()
-				&& mouseX <= config.getHudX() + PANEL_WIDTH
+				&& mouseX <= config.getHudX() + getScaledPanelWidth()
 				&& mouseY >= config.getHudY()
-				&& mouseY <= config.getHudY() + PANEL_HEIGHT;
+				&& mouseY <= config.getHudY() + getScaledPanelHeight();
 	}
 
 	public static void setHudPositionClamped(int x, int y, int screenWidth, int screenHeight) {
 		FlavorClientConfig config = FlavorClientConfig.get();
 		config.setHudPosition(x, y);
-		config.clampHudPosition(screenWidth, screenHeight, PANEL_WIDTH, PANEL_HEIGHT);
+		config.clampHudPosition(screenWidth, screenHeight, getScaledPanelWidth(), getScaledPanelHeight());
+	}
+
+	public static void adjustHudScale(double scrollAmount, int screenWidth, int screenHeight) {
+		FlavorClientConfig config = FlavorClientConfig.get();
+		config.adjustHudScale(scrollAmount);
+		config.clampHudPosition(screenWidth, screenHeight, getScaledPanelWidth(), getScaledPanelHeight());
+		config.save();
+	}
+
+	private static int getScaledPanelWidth() {
+		return Math.round(PANEL_WIDTH * FlavorClientConfig.get().getHudScale());
+	}
+
+	private static int getScaledPanelHeight() {
+		return Math.round(PANEL_HEIGHT * FlavorClientConfig.get().getHudScale());
+	}
+
+	private static void renderPanelScaled(GuiGraphics context, int x, int y, float scale, FlavorPlayerComponent component) {
+		context.pose().pushPose();
+		context.pose().translate(x, y, 0.0F);
+		context.pose().scale(scale, scale, 1.0F);
+		renderPanel(context, 0, 0, component);
+		context.pose().popPose();
 	}
 
 	private static void renderPanel(GuiGraphics context, int x, int y, FlavorPlayerComponent component) {

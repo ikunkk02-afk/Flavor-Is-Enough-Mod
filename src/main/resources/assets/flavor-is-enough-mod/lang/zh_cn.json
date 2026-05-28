@@ -9,5 +9,6 @@
   "category.flavor-is-enough-mod": "味真足模组",
   "key.flavor-is-enough-mod.toggle_hud": "切换味真足 HUD",
   "key.flavor-is-enough-mod.edit_hud": "编辑味真足 HUD",
-  "screen.flavor-is-enough-mod.hud_editor": "味真足 HUD 编辑"
+  "screen.flavor-is-enough-mod.hud_editor": "味真足 HUD 编辑",
+  "screen.flavor-is-enough-mod.hud_editor.instructions": "左键拖动面板 | 滚轮调整大小 | ESC 保存并关闭"
 }

@@ -2,6 +2,7 @@ package com.ikunkk02.flavorisenough;
 
 import com.ikunkk02.flavorisenough.item.ModItemGroups;
 import com.ikunkk02.flavorisenough.item.ModItems;
+import com.ikunkk02.flavorisenough.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -19,5 +20,6 @@ public class FlavorIsEnoughMod implements ModInitializer {
 	public void onInitialize() {
 		ModItems.register();
 		ModItemGroups.register();
+		ModSounds.register();
 	}
 }
