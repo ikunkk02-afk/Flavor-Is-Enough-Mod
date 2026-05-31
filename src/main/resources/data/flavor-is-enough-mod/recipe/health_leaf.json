@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    { "tag": "minecraft:leaves" },
+    { "item": "minecraft:apple" },
+    { "item": "minecraft:sweet_berries" }
+  ],
+  "result": {
+    "id": "flavor-is-enough-mod:health_leaf",
+    "count": 2
+  }
+}

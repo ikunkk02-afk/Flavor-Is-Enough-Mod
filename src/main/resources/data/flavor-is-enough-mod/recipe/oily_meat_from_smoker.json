@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "minecraft:cooked_porkchop"
+  },
+  "result": {
+    "id": "flavor-is-enough-mod:oily_meat"
+  }
+}

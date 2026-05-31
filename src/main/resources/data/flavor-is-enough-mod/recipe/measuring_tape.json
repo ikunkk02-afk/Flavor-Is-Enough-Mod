@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SIS",
+    "IPI",
+    "SIS"
+  ],
+  "key": {
+    "S": { "item": "minecraft:string" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "P": { "item": "minecraft:paper" }
+  },
+  "result": {
+    "id": "flavor-is-enough-mod:measuring_tape",
+    "count": 1
+  }
+}

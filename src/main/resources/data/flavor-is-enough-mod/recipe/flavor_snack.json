@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    { "item": "minecraft:wheat" },
+    { "item": "minecraft:sugar" },
+    { "item": "minecraft:apple" }
+  ],
+  "result": {
+    "id": "flavor-is-enough-mod:flavor_snack",
+    "count": 2
+  }
+}
