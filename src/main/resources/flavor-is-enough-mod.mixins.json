@@ -5,6 +5,7 @@
 	"mixins": [
 		"CakeBlockMixin",
 		"LivingEntityEatMixin",
+		"LivingEntityJumpMixin",
 		"ExampleMixin"
 	],
 	"injectors": {

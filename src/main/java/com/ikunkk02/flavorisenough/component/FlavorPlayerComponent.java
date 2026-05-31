@@ -9,6 +9,8 @@ import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<FlavorPlayerComponent>, AutoSyncedComponent {
 	private static final int MIN_VALUE = 0;
 	private static final int MAX_VALUE = 100;
+	private static final long INITIAL_HEAVY_JUMP_TIME = -100L;
+	private static final long INITIAL_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME = -20L;
 
 	private static final String FLAVOR_VALUE_KEY = "FlavorValue";
 	private static final String OBESITY_VALUE_KEY = "ObesityValue";
@@ -17,6 +19,8 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private static final String LAST_FAT_BURDEN_TIME_KEY = "LastFatBurdenTime";
 	private static final String FIRST_FAT_BURDEN_TRIGGER_KEY = "FirstFatBurdenTrigger";
 	private static final String LAST_HUNGER_TIME_KEY = "LastHungerTime";
+	private static final String LAST_HEAVY_JUMP_TIME_KEY = "LastHeavyJumpTime";
+	private static final String LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY = "LastHeavyJumpCooldownMessageTime";
 
 	private int flavorValue;
 	private int obesityValue;
@@ -25,6 +29,8 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private long lastFatBurdenEffectTime;
 	private boolean firstFatBurdenTrigger;
 	private long lastHungerEffectTime;
+	private long lastHeavyJumpTime = INITIAL_HEAVY_JUMP_TIME;
+	private long lastHeavyJumpCooldownMessageTime = INITIAL_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME;
 
 	public int getFlavorValue() {
 		return flavorValue;
@@ -124,6 +130,22 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		this.lastHungerEffectTime = time;
 	}
 
+	public long getLastHeavyJumpTime() {
+		return lastHeavyJumpTime;
+	}
+
+	public void setLastHeavyJumpTime(long time) {
+		this.lastHeavyJumpTime = time;
+	}
+
+	public long getLastHeavyJumpCooldownMessageTime() {
+		return lastHeavyJumpCooldownMessageTime;
+	}
+
+	public void setLastHeavyJumpCooldownMessageTime(long time) {
+		this.lastHeavyJumpCooldownMessageTime = time;
+	}
+
 	@Override
 	public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		setFlavorValue(tag.getInt(FLAVOR_VALUE_KEY));
@@ -133,6 +155,12 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastFatBurdenEffectTime = tag.getLong(LAST_FAT_BURDEN_TIME_KEY);
 		firstFatBurdenTrigger = tag.getBoolean(FIRST_FAT_BURDEN_TRIGGER_KEY);
 		lastHungerEffectTime = tag.getLong(LAST_HUNGER_TIME_KEY);
+		lastHeavyJumpTime = tag.contains(LAST_HEAVY_JUMP_TIME_KEY)
+				? tag.getLong(LAST_HEAVY_JUMP_TIME_KEY)
+				: INITIAL_HEAVY_JUMP_TIME;
+		lastHeavyJumpCooldownMessageTime = tag.contains(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY)
+				? tag.getLong(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY)
+				: INITIAL_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME;
 	}
 
 	@Override
@@ -144,6 +172,8 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		tag.putLong(LAST_FAT_BURDEN_TIME_KEY, lastFatBurdenEffectTime);
 		tag.putBoolean(FIRST_FAT_BURDEN_TRIGGER_KEY, firstFatBurdenTrigger);
 		tag.putLong(LAST_HUNGER_TIME_KEY, lastHungerEffectTime);
+		tag.putLong(LAST_HEAVY_JUMP_TIME_KEY, lastHeavyJumpTime);
+		tag.putLong(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY, lastHeavyJumpCooldownMessageTime);
 	}
 
 	@Override
@@ -155,6 +185,8 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastFatBurdenEffectTime = other.lastFatBurdenEffectTime;
 		firstFatBurdenTrigger = other.firstFatBurdenTrigger;
 		lastHungerEffectTime = other.lastHungerEffectTime;
+		lastHeavyJumpTime = other.lastHeavyJumpTime;
+		lastHeavyJumpCooldownMessageTime = other.lastHeavyJumpCooldownMessageTime;
 	}
 
 	private static int clamp(int value) {
