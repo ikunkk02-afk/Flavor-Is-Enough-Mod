@@ -1,7 +1,10 @@
 package com.ikunkk02.flavorisenough;
 
+import com.ikunkk02.flavorisenough.effect.FatBurdenEffectHandler;
+import com.ikunkk02.flavorisenough.effect.ModStatusEffects;
 import com.ikunkk02.flavorisenough.item.ModItemGroups;
 import com.ikunkk02.flavorisenough.item.ModItems;
+import com.ikunkk02.flavorisenough.scale.PlayerBodyScaleHandler;
 import com.ikunkk02.flavorisenough.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
@@ -21,5 +24,8 @@ public class FlavorIsEnoughMod implements ModInitializer {
 		ModItems.register();
 		ModItemGroups.register();
 		ModSounds.register();
+		ModStatusEffects.register();
+		FatBurdenEffectHandler.register();
+		PlayerBodyScaleHandler.register();
 	}
 }

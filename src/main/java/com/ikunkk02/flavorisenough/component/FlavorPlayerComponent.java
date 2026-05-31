@@ -14,11 +14,17 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private static final String OBESITY_VALUE_KEY = "ObesityValue";
 	private static final String HEALTH_VALUE_KEY = "HealthValue";
 	private static final String STOMACH_LOAD_KEY = "StomachLoad";
+	private static final String LAST_FAT_BURDEN_TIME_KEY = "LastFatBurdenTime";
+	private static final String FIRST_FAT_BURDEN_TRIGGER_KEY = "FirstFatBurdenTrigger";
+	private static final String LAST_HUNGER_TIME_KEY = "LastHungerTime";
 
 	private int flavorValue;
 	private int obesityValue;
 	private int healthValue = MAX_VALUE;
 	private int stomachLoad;
+	private long lastFatBurdenEffectTime;
+	private boolean firstFatBurdenTrigger;
+	private long lastHungerEffectTime;
 
 	public int getFlavorValue() {
 		return flavorValue;
@@ -94,12 +100,39 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		};
 	}
 
+	public long getLastFatBurdenEffectTime() {
+		return lastFatBurdenEffectTime;
+	}
+
+	public void setLastFatBurdenEffectTime(long time) {
+		this.lastFatBurdenEffectTime = time;
+	}
+
+	public boolean isFirstFatBurdenTrigger() {
+		return !firstFatBurdenTrigger;
+	}
+
+	public void markFatBurdenTriggered() {
+		this.firstFatBurdenTrigger = true;
+	}
+
+	public long getLastHungerEffectTime() {
+		return lastHungerEffectTime;
+	}
+
+	public void setLastHungerEffectTime(long time) {
+		this.lastHungerEffectTime = time;
+	}
+
 	@Override
 	public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		setFlavorValue(tag.getInt(FLAVOR_VALUE_KEY));
 		setObesityValue(tag.getInt(OBESITY_VALUE_KEY));
 		setHealthValue(tag.contains(HEALTH_VALUE_KEY) ? tag.getInt(HEALTH_VALUE_KEY) : MAX_VALUE);
 		setStomachLoad(tag.getInt(STOMACH_LOAD_KEY));
+		lastFatBurdenEffectTime = tag.getLong(LAST_FAT_BURDEN_TIME_KEY);
+		firstFatBurdenTrigger = tag.getBoolean(FIRST_FAT_BURDEN_TRIGGER_KEY);
+		lastHungerEffectTime = tag.getLong(LAST_HUNGER_TIME_KEY);
 	}
 
 	@Override
@@ -108,6 +141,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		tag.putInt(OBESITY_VALUE_KEY, obesityValue);
 		tag.putInt(HEALTH_VALUE_KEY, healthValue);
 		tag.putInt(STOMACH_LOAD_KEY, stomachLoad);
+		tag.putLong(LAST_FAT_BURDEN_TIME_KEY, lastFatBurdenEffectTime);
+		tag.putBoolean(FIRST_FAT_BURDEN_TRIGGER_KEY, firstFatBurdenTrigger);
+		tag.putLong(LAST_HUNGER_TIME_KEY, lastHungerEffectTime);
 	}
 
 	@Override
@@ -116,6 +152,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		setObesityValue(other.obesityValue);
 		setHealthValue(other.healthValue);
 		setStomachLoad(other.stomachLoad);
+		lastFatBurdenEffectTime = other.lastFatBurdenEffectTime;
+		firstFatBurdenTrigger = other.firstFatBurdenTrigger;
+		lastHungerEffectTime = other.lastHungerEffectTime;
 	}
 
 	private static int clamp(int value) {

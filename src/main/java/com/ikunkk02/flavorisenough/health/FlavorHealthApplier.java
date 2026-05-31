@@ -2,7 +2,9 @@ package com.ikunkk02.flavorisenough.health;
 
 import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
-import net.minecraft.network.chat.Component;
+import com.ikunkk02.flavorisenough.effect.FatBurdenEffectHandler;
+import com.ikunkk02.flavorisenough.scale.PlayerBodyScaleHandler;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 public final class FlavorHealthApplier {
@@ -22,12 +24,13 @@ public final class FlavorHealthApplier {
 		component.addHealthValue(change.healthValue());
 		component.addStomachLoad(change.stomachLoad());
 
-		int newStage = component.getObesityStageId();
 		ModEntityComponents.FLAVOR_PLAYER.sync(player);
 
-		if (notifyStageChange && newStage != oldStage && newStage > 0) {
-			player.displayClientMessage(Component.literal("你的体态阶段变为：" + component.getObesityStageText()), false);
+		if (player instanceof ServerPlayer serverPlayer) {
+			PlayerBodyScaleHandler.refreshAfterHealthChange(serverPlayer, oldStage);
 		}
+
+		FatBurdenEffectHandler.applyAfterEating(player);
 	}
 
 	public static void apply(Player player, int flavorValue, int obesityValue, int healthValue, int stomachLoad, boolean notifyStageChange) {

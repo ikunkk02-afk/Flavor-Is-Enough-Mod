@@ -10,5 +10,7 @@
   "key.flavor-is-enough-mod.toggle_hud": "切换味真足 HUD",
   "key.flavor-is-enough-mod.edit_hud": "编辑味真足 HUD",
   "screen.flavor-is-enough-mod.hud_editor": "味真足 HUD 编辑",
-  "screen.flavor-is-enough-mod.hud_editor.instructions": "左键拖动面板 | 滚轮调整大小 | ESC 保存并关闭"
+  "screen.flavor-is-enough-mod.hud_editor.instructions": "左键拖动面板 | 滚轮调整大小 | ESC 保存并关闭",
+  "effect.flavor-is-enough-mod.fat_burden": "肥胖负担",
+  "effect.flavor-is-enough-mod.fat_burden.first_trigger": "你进入了肥胖负担状态：短时间获得抗性，但也会更容易饥饿。"
 }

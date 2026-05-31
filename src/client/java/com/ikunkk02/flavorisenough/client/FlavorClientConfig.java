@@ -22,6 +22,7 @@ public final class FlavorClientConfig {
 	private static FlavorClientConfig instance = new FlavorClientConfig();
 
 	private boolean hudEnabled = true;
+	private Boolean fatBodyLayerEnabled = true;
 	private int hudX = 10;
 	private int hudY = 10;
 	private float hudScale = DEFAULT_HUD_SCALE;
@@ -54,6 +55,14 @@ public final class FlavorClientConfig {
 
 	public void setHudEnabled(boolean hudEnabled) {
 		this.hudEnabled = hudEnabled;
+	}
+
+	public boolean isFatBodyLayerEnabled() {
+		return fatBodyLayerEnabled == null || fatBodyLayerEnabled;
+	}
+
+	public void setFatBodyLayerEnabled(boolean fatBodyLayerEnabled) {
+		this.fatBodyLayerEnabled = fatBodyLayerEnabled;
 	}
 
 	public int getHudX() {
@@ -97,6 +106,9 @@ public final class FlavorClientConfig {
 	private void sanitize() {
 		if (Float.isNaN(hudScale) || hudScale <= 0.0F) {
 			hudScale = DEFAULT_HUD_SCALE;
+		}
+		if (fatBodyLayerEnabled == null) {
+			fatBodyLayerEnabled = true;
 		}
 		setHudScale(hudScale);
 	}

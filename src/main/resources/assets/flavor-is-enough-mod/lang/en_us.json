@@ -10,5 +10,7 @@
   "key.flavor-is-enough-mod.toggle_hud": "Toggle Flavor Is Enough HUD",
   "key.flavor-is-enough-mod.edit_hud": "Edit Flavor Is Enough HUD",
   "screen.flavor-is-enough-mod.hud_editor": "Flavor Is Enough HUD Editor",
-  "screen.flavor-is-enough-mod.hud_editor.instructions": "Left-drag the panel | Scroll to resize | ESC saves and closes"
+  "screen.flavor-is-enough-mod.hud_editor.instructions": "Left-drag the panel | Scroll to resize | ESC saves and closes",
+  "effect.flavor-is-enough-mod.fat_burden": "Fat Burden",
+  "effect.flavor-is-enough-mod.fat_burden.first_trigger": "You have entered the Fat Burden state: briefly gain Resistance but become hungrier."
 }

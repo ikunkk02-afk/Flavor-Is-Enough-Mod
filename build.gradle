@@ -12,9 +12,14 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	mavenCentral()
 	maven {
 		name = "Ladysnake"
 		url = "https://maven.ladysnake.org/releases"
+	}
+	maven {
+		name = "JitPack"
+		url = "https://jitpack.io"
 	}
 }
 
@@ -44,9 +49,14 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modApi("com.github.Virtuoel:Pehkui:${project.pehkui_version}") {
+		exclude group: "net.fabricmc.fabric-api"
+	}
 	modImplementation files("run/mods/cardinal-components-api-${project.cardinal_components_version}.jar")
 	modCompileOnly "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
 	modCompileOnly "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cardinal_components_version}"
+	testImplementation "org.junit.jupiter:junit-jupiter:5.10.3"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 	
 }
 
@@ -61,6 +71,10 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
+}
+
+tasks.withType(Test).configureEach {
+	useJUnitPlatform()
 }
 
 java {

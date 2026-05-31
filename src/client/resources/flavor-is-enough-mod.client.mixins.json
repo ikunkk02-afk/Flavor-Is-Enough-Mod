@@ -3,7 +3,9 @@
 	"package": "com.ikunkk02.flavorisenough.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"ExampleClientMixin",
+		"LivingEntityRendererAccessor",
+		"PlayerRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
