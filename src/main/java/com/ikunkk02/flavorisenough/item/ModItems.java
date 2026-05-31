@@ -15,7 +15,7 @@ public final class ModItems {
 	public static final Item OILY_MEAT = register("oily_meat",
 			new FlavorFoodItem(new Item.Properties().food(food(10, 1.0F)), 10, 15, -5, 18));
 	public static final Item HEALTH_LEAF = register("health_leaf",
-			new FlavorFoodItem(new Item.Properties().food(food(1, 0.2F)), 0, -3, 10, -5));
+			new FlavorFoodItem(new Item.Properties().food(food(1, 0.2F)), 0, -1, 6, -3));
 	public static final Item MEASURING_TAPE = register("measuring_tape", new MeasuringTapeItem(new Item.Properties()));
 	public static final Item WARNING_CARD = register("warning_card", new WarningCardItem(new Item.Properties()));
 

@@ -16,7 +16,7 @@ import org.lwjgl.glfw.GLFW;
 
 public final class FlavorHudRenderer {
 	public static final int PANEL_WIDTH = 176;
-	public static final int PANEL_HEIGHT = 112;
+	public static final int PANEL_HEIGHT = 128;
 
 	private static final int PADDING = 8;
 	private static final int BAR_HEIGHT = 5;
@@ -32,6 +32,7 @@ public final class FlavorHudRenderer {
 	private static final int OBESITY_COLOR = 0xFFFF6542;
 	private static final int HEALTH_COLOR = 0xFF58D47A;
 	private static final int STOMACH_COLOR = 0xFFB767FF;
+	private static final int EXERCISE_COLOR = 0xFF4DA6FF;
 
 	private static KeyMapping toggleHudKey;
 	private static KeyMapping editHudKey;
@@ -165,6 +166,7 @@ public final class FlavorHudRenderer {
 		drawMetric(context, font, "肥胖值", component.getObesityValue(), x + PADDING, rowY + ROW_HEIGHT, barWidth, OBESITY_COLOR);
 		drawMetric(context, font, "健康值", component.getHealthValue(), x + PADDING, rowY + (ROW_HEIGHT * 2), barWidth, HEALTH_COLOR);
 		drawMetric(context, font, "胃袋负荷", component.getStomachLoad(), x + PADDING, rowY + (ROW_HEIGHT * 3), barWidth, STOMACH_COLOR);
+		drawMetric(context, font, "运动进度", component.getExerciseValue(), x + PADDING, rowY + (ROW_HEIGHT * 4), barWidth, EXERCISE_COLOR);
 
 		String stage = "体态阶段：" + component.getObesityStageText();
 		context.drawString(font, stage, x + PADDING, y + PANEL_HEIGHT - PADDING - 9, MUTED_TEXT_COLOR, true);

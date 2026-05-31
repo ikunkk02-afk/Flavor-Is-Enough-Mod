@@ -21,6 +21,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private static final String LAST_HUNGER_TIME_KEY = "LastHungerTime";
 	private static final String LAST_HEAVY_JUMP_TIME_KEY = "LastHeavyJumpTime";
 	private static final String LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY = "LastHeavyJumpCooldownMessageTime";
+	private static final String EXERCISE_VALUE_KEY = "ExerciseValue";
+	private static final String LAST_EXERCISE_REWARD_TIME_KEY = "LastExerciseRewardTime";
+	private static final String LAST_WORKOUT_MESSAGE_TIME_KEY = "LastWorkoutMessageTime";
 
 	private int flavorValue;
 	private int obesityValue;
@@ -31,6 +34,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private long lastHungerEffectTime;
 	private long lastHeavyJumpTime = INITIAL_HEAVY_JUMP_TIME;
 	private long lastHeavyJumpCooldownMessageTime = INITIAL_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME;
+	private int exerciseValue;
+	private long lastExerciseRewardTime;
+	private long lastWorkoutMessageTime;
 
 	public int getFlavorValue() {
 		return flavorValue;
@@ -146,6 +152,34 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		this.lastHeavyJumpCooldownMessageTime = time;
 	}
 
+	public int getExerciseValue() {
+		return exerciseValue;
+	}
+
+	public void setExerciseValue(int value) {
+		this.exerciseValue = clamp(value);
+	}
+
+	public void addExerciseValue(int amount) {
+		setExerciseValue(exerciseValue + amount);
+	}
+
+	public long getLastExerciseRewardTime() {
+		return lastExerciseRewardTime;
+	}
+
+	public void setLastExerciseRewardTime(long time) {
+		this.lastExerciseRewardTime = time;
+	}
+
+	public long getLastWorkoutMessageTime() {
+		return lastWorkoutMessageTime;
+	}
+
+	public void setLastWorkoutMessageTime(long time) {
+		this.lastWorkoutMessageTime = time;
+	}
+
 	@Override
 	public void readFromNbt(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		setFlavorValue(tag.getInt(FLAVOR_VALUE_KEY));
@@ -161,6 +195,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastHeavyJumpCooldownMessageTime = tag.contains(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY)
 				? tag.getLong(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY)
 				: INITIAL_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME;
+		exerciseValue = tag.getInt(EXERCISE_VALUE_KEY);
+		lastExerciseRewardTime = tag.getLong(LAST_EXERCISE_REWARD_TIME_KEY);
+		lastWorkoutMessageTime = tag.getLong(LAST_WORKOUT_MESSAGE_TIME_KEY);
 	}
 
 	@Override
@@ -174,6 +211,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		tag.putLong(LAST_HUNGER_TIME_KEY, lastHungerEffectTime);
 		tag.putLong(LAST_HEAVY_JUMP_TIME_KEY, lastHeavyJumpTime);
 		tag.putLong(LAST_HEAVY_JUMP_COOLDOWN_MESSAGE_TIME_KEY, lastHeavyJumpCooldownMessageTime);
+		tag.putInt(EXERCISE_VALUE_KEY, exerciseValue);
+		tag.putLong(LAST_EXERCISE_REWARD_TIME_KEY, lastExerciseRewardTime);
+		tag.putLong(LAST_WORKOUT_MESSAGE_TIME_KEY, lastWorkoutMessageTime);
 	}
 
 	@Override
@@ -187,6 +227,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastHungerEffectTime = other.lastHungerEffectTime;
 		lastHeavyJumpTime = other.lastHeavyJumpTime;
 		lastHeavyJumpCooldownMessageTime = other.lastHeavyJumpCooldownMessageTime;
+		exerciseValue = other.exerciseValue;
+		lastExerciseRewardTime = other.lastExerciseRewardTime;
+		lastWorkoutMessageTime = other.lastWorkoutMessageTime;
 	}
 
 	private static int clamp(int value) {

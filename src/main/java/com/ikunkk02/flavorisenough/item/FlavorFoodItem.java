@@ -1,7 +1,10 @@
 package com.ikunkk02.flavorisenough.item;
 
+import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
+import com.ikunkk02.flavorisenough.component.ModEntityComponents;
 import com.ikunkk02.flavorisenough.health.FlavorHealthApplier;
 import com.ikunkk02.flavorisenough.sound.ModSounds;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +17,9 @@ public class FlavorFoodItem extends Item {
 	private final int obesityChange;
 	private final int healthChange;
 	private final int stomachLoadChange;
+
+	private static final Component HEALTH_LEAF_WEAK_MESSAGE = Component.translatable(
+			"item.flavor-is-enough-mod.health_leaf.weak");
 
 	public FlavorFoodItem(Properties properties, int flavorChange, int obesityChange, int healthChange, int stomachLoadChange) {
 		super(properties);
@@ -31,6 +37,11 @@ public class FlavorFoodItem extends Item {
 			FlavorHealthApplier.apply(player, flavorChange, obesityChange, healthChange, stomachLoadChange, false);
 			if (this != ModItems.HEALTH_LEAF) {
 				level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.EASTER_FOOD, SoundSource.PLAYERS, 1.0F, 1.0F);
+			} else {
+				FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
+				if (component.getObesityValue() >= 60) {
+					player.displayClientMessage(HEALTH_LEAF_WEAK_MESSAGE, false);
+				}
 			}
 		}
 
