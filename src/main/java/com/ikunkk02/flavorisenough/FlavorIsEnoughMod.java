@@ -2,6 +2,7 @@ package com.ikunkk02.flavorisenough;
 
 import com.ikunkk02.flavorisenough.effect.FatBurdenEffectHandler;
 import com.ikunkk02.flavorisenough.effect.ModStatusEffects;
+import com.ikunkk02.flavorisenough.entity.ModEntities;
 import com.ikunkk02.flavorisenough.exercise.ExerciseHandler;
 import com.ikunkk02.flavorisenough.item.ModItemGroups;
 import com.ikunkk02.flavorisenough.item.ModItems;
@@ -25,6 +26,7 @@ public class FlavorIsEnoughMod implements ModInitializer {
 		ModItems.register();
 		ModItemGroups.register();
 		ModSounds.register();
+		ModEntities.register();
 		ModStatusEffects.register();
 		FatBurdenEffectHandler.register();
 		ExerciseHandler.register();

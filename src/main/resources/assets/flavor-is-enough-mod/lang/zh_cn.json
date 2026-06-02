@@ -15,5 +15,7 @@
   "effect.flavor-is-enough-mod.fat_burden.first_trigger": "你进入了肥胖负担状态：短时间获得抗性，但也会更容易饥饿。",
   "exercise.flavor-is-enough-mod.recovery": "运动恢复生效：肥胖值下降，身体负担减轻。",
   "exercise.flavor-is-enough-mod.encourage": "继续运动，身体状态正在恢复。",
-  "item.flavor-is-enough-mod.health_leaf.weak": "健康叶只能缓解状态，真正恢复还需要运动。"
+  "item.flavor-is-enough-mod.health_leaf.weak": "健康叶只能缓解状态，真正恢复还需要运动。",
+  "entity.flavor-is-enough-mod.liangzi": "良子",
+  "item.flavor-is-enough-mod.liangzi_spawn_egg": "良子刷怪蛋"
 }

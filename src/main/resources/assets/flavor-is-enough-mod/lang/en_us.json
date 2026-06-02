@@ -15,5 +15,7 @@
   "effect.flavor-is-enough-mod.fat_burden.first_trigger": "You have entered the Fat Burden state: briefly gain Resistance but become hungrier.",
   "exercise.flavor-is-enough-mod.recovery": "Exercise recovery: obesity decreased, body burden reduced.",
   "exercise.flavor-is-enough-mod.encourage": "Keep moving, your body is recovering.",
-  "item.flavor-is-enough-mod.health_leaf.weak": "Health Leaf can only ease the symptoms; real recovery requires exercise."
+  "item.flavor-is-enough-mod.health_leaf.weak": "Health Leaf can only ease the symptoms; real recovery requires exercise.",
+  "entity.flavor-is-enough-mod.liangzi": "Liangzi",
+  "item.flavor-is-enough-mod.liangzi_spawn_egg": "Liangzi Spawn Egg"
 }

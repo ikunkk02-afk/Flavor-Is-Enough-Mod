@@ -3,5 +3,11 @@
     "sounds": [
       "flavor-is-enough-mod:easter_food"
     ]
+  },
+  "liangzi_trade": {
+    "sounds": [
+      "flavor-is-enough-mod:liangzi_sound_1",
+      "flavor-is-enough-mod:liangzi_sound_2"
+    ]
   }
 }

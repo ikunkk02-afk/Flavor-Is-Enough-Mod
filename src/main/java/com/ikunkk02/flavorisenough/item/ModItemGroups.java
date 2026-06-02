@@ -1,6 +1,7 @@
 package com.ikunkk02.flavorisenough.item;
 
 import com.ikunkk02.flavorisenough.FlavorIsEnoughMod;
+import com.ikunkk02.flavorisenough.entity.ModEntities;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,6 +24,7 @@ public final class ModItemGroups {
 						output.accept(ModItems.HEALTH_LEAF);
 						output.accept(ModItems.MEASURING_TAPE);
 						output.accept(ModItems.WARNING_CARD);
+						output.accept(ModEntities.LIANGZI_SPAWN_EGG);
 					})
 					.build());
 

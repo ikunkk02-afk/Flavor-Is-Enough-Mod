@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 
 public final class ModSounds {
 	public static final SoundEvent EASTER_FOOD = register("easter_food");
+	public static final SoundEvent LIANGZI_TRADE = register("liangzi_trade");
 
 	private ModSounds() {
 	}
