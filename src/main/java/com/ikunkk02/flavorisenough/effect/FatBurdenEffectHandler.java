@@ -2,6 +2,7 @@ package com.ikunkk02.flavorisenough.effect;
 
 import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
+import com.ikunkk02.flavorisenough.funmode.FunModeHandler;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -32,6 +33,11 @@ public final class FatBurdenEffectHandler {
 
     public static void applyAfterEating(Player player) {
         if (player.level().isClientSide()) {
+            return;
+        }
+
+        // In fun mode, no negative effects ever
+        if (FunModeHandler.isFunModeActive(player)) {
             return;
         }
 

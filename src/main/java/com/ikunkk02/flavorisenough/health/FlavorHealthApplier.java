@@ -3,6 +3,7 @@ package com.ikunkk02.flavorisenough.health;
 import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
 import com.ikunkk02.flavorisenough.effect.FatBurdenEffectHandler;
+import com.ikunkk02.flavorisenough.funmode.FunModeHandler;
 import com.ikunkk02.flavorisenough.scale.PlayerBodyScaleHandler;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +14,11 @@ public final class FlavorHealthApplier {
 
 	public static void apply(Player player, FlavorHealthChange change, boolean notifyStageChange) {
 		if (player.level().isClientSide()) {
+			return;
+		}
+
+		// In fun mode, skip all negative effects
+		if (FunModeHandler.isFunModeActive(player)) {
 			return;
 		}
 

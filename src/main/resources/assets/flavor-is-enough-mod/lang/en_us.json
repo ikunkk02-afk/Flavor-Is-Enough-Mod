@@ -19,5 +19,13 @@
   "exercise.flavor-is-enough-mod.encourage": "Keep moving, your body is recovering.",
   "item.flavor-is-enough-mod.health_leaf.weak": "Health Leaf can only ease the symptoms; real recovery requires exercise.",
   "entity.flavor-is-enough-mod.liangzi": "Liangzi",
-  "item.flavor-is-enough-mod.liangzi_spawn_egg": "Liangzi Spawn Egg"
+  "item.flavor-is-enough-mod.liangzi_spawn_egg": "Liangzi Spawn Egg",
+  "message.flavor-is-enough-mod.fun_mode_unlocked": "§6§l🎉 Liangzi grants you the power of 'Big Stomach'! You can now devour everything in the world, getting stronger with every bite! 🎉",
+  "message.flavor-is-enough-mod.fun_mode_offering_progress": "§eLiangzi accepts your offering (%d/%d), %d more meat needed to unlock Big Stomach power…",
+  "message.flavor-is-enough-mod.fun_mode_not_enabled": "§cFun mode is not enabled in config. Please enable it in mod settings first.",
+  "text.autoconfig.flavor-is-enough-mod.title": "Flavor Is Enough — Mod Settings",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled": "Fun Mode",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled.@Tooltip": "When enabled, the Liangzi NPC will accept meat offerings to unlock the 'Big Stomach' fun mode",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired": "Offering Requirement",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired.@Tooltip": "Number of meat items required to unlock fun mode (default: 128 = 2 stacks)"
 }

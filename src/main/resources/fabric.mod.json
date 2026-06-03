@@ -3,9 +3,9 @@
 	"id": "flavor-is-enough-mod",
 	"version": "${version}",
 	"name": "Flavor Is Enough Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "味真足模组 — 良子大胃袋吃播主题趣味模组",
 	"authors": [
-		"Me!"
+		"ikunkk02"
 	],
 	"contact": {
 		"homepage": "https://github.com/ikunkk02-afk/Flavor-Is-Enough-Mod",
@@ -26,6 +26,9 @@
 		],
 		"fabric-datagen": [
 			"com.ikunkk02.flavorisenough.client.FlavorIsEnoughModDataGenerator"
+		],
+		"modmenu": [
+			"com.ikunkk02.flavorisenough.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [
@@ -48,5 +51,9 @@
 		"cardinal-components-base": ">=6.1.3",
 		"cardinal-components-entity": ">=6.1.3",
 		"pehkui": ">=3.8.3"
+	},
+	"recommends": {
+		"cloth-config": ">=15.0.0",
+		"modmenu": ">=11.0.0"
 	}
 }

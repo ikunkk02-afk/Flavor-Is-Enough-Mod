@@ -19,5 +19,13 @@
   "exercise.flavor-is-enough-mod.encourage": "继续运动，身体状态正在恢复。",
   "item.flavor-is-enough-mod.health_leaf.weak": "健康叶只能缓解状态，真正恢复还需要运动。",
   "entity.flavor-is-enough-mod.liangzi": "良子",
-  "item.flavor-is-enough-mod.liangzi_spawn_egg": "良子刷怪蛋"
+  "item.flavor-is-enough-mod.liangzi_spawn_egg": "良子刷怪蛋",
+  "message.flavor-is-enough-mod.fun_mode_unlocked": "§6§l🎉 良子赐予你「大胃袋」之力！现在你可以吃下世间万物，越吃越强！🎉",
+  "message.flavor-is-enough-mod.fun_mode_offering_progress": "§e良子接受了你的上供（%d/%d），还需 %d 个肉类即可获得大胃袋之力…",
+  "message.flavor-is-enough-mod.fun_mode_not_enabled": "§c趣味玩法未在配置中开启，请先在模组设置中启用。",
+  "text.autoconfig.flavor-is-enough-mod.title": "味真足 — 模组设置",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled": "趣味玩法开关",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled.@Tooltip": "开启后，良子 NPC 将接受肉类上供，积累后可解锁「大胃袋」趣味模式",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired": "上供肉类数量",
+  "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired.@Tooltip": "解锁趣味玩法需要的肉类数量（默认128=2组）"
 }

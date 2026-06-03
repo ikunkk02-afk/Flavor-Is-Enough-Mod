@@ -6,7 +6,8 @@
 		"CakeBlockMixin",
 		"LivingEntityEatMixin",
 		"LivingEntityJumpMixin",
-		"ExampleMixin"
+		"ExampleMixin",
+		"FunModeUseItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
