@@ -12,6 +12,8 @@
   "screen.flavor-is-enough-mod.hud_editor": "味真足 HUD 编辑",
   "screen.flavor-is-enough-mod.hud_editor.instructions": "左键拖动面板 | 滚轮调整大小 | ESC 保存并关闭",
   "effect.flavor-is-enough-mod.fat_burden": "肥胖负担",
+  "effect.flavor-is-enough-mod.fatty_liver": "脂肪肝",
+  "effect.flavor-is-enough-mod.cardiopulmonary_burden": "心肺负担",
   "effect.flavor-is-enough-mod.fat_burden.first_trigger": "你进入了肥胖负担状态：短时间获得抗性，但也会更容易饥饿。",
   "exercise.flavor-is-enough-mod.recovery": "运动恢复生效：肥胖值下降，身体负担减轻。",
   "exercise.flavor-is-enough-mod.encourage": "继续运动，身体状态正在恢复。",

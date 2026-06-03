@@ -24,6 +24,15 @@ class FatBurdenEffectHandlerTest {
     }
 
     @Test
+    void obesityDiseaseEffectsUseMildAndSevereThresholds() {
+        assertFalse(FatBurdenEffectHandler.shouldApplyMildObesityDisease(74));
+        assertTrue(FatBurdenEffectHandler.shouldApplyMildObesityDisease(75));
+
+        assertFalse(FatBurdenEffectHandler.shouldApplySevereObesityDisease(3));
+        assertTrue(FatBurdenEffectHandler.shouldApplySevereObesityDisease(4));
+    }
+
+    @Test
     void resistanceRefreshesWhenMissingLowDurationOrUnderAmplified() {
         assertTrue(FatBurdenEffectHandler.shouldRefreshEffect(-1, 0, 0));
         assertTrue(FatBurdenEffectHandler.shouldRefreshEffect(0, 99, 0));

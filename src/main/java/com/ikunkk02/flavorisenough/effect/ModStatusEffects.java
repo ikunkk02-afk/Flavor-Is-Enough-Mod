@@ -11,6 +11,12 @@ public final class ModStatusEffects {
     public static final MobEffect FAT_BURDEN = register("fat_burden", new FatBurdenEffect());
     public static final Holder<MobEffect> FAT_BURDEN_HOLDER = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(FAT_BURDEN);
 
+    public static final MobEffect FATTY_LIVER = register("fatty_liver", new FattyLiverEffect());
+    public static final Holder<MobEffect> FATTY_LIVER_HOLDER = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(FATTY_LIVER);
+
+    public static final MobEffect CARDIOPULMONARY_BURDEN = register("cardiopulmonary_burden", new CardioPulmonaryBurdenEffect());
+    public static final Holder<MobEffect> CARDIOPULMONARY_BURDEN_HOLDER = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(CARDIOPULMONARY_BURDEN);
+
     private ModStatusEffects() {
     }
 

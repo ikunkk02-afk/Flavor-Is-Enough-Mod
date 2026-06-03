@@ -17,6 +17,7 @@ public final class FatBurdenEffectHandler {
     private static final int HUNGER_INTERVAL_TICKS = 6000;
     private static final int EFFECT_REFRESH_TICKS = 100;
     private static final int TRIGGER_OBESITY = 60;
+    private static final int MILD_DISEASE_OBESITY = 75;
     private static final int NO_EXISTING_EFFECT = -1;
 
     private static final Component FIRST_TRIGGER_MESSAGE = Component.translatable(
@@ -79,6 +80,7 @@ public final class FatBurdenEffectHandler {
             }
 
             FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
+            int obesity = component.getObesityValue();
             int stage = component.getObesityStageId();
             MobEffectInstance fatBurden = player.getEffect(ModStatusEffects.FAT_BURDEN_HOLDER);
             boolean hasFatBurden = fatBurden != null;
@@ -90,6 +92,8 @@ public final class FatBurdenEffectHandler {
             if (!refreshTimedEffects) {
                 continue;
             }
+
+            refreshObesityDiseaseEffects(player, obesity, stage);
 
             if (!shouldApplyBurdenEffects(stage, hasFatBurden)) {
                 player.removeEffect(MobEffects.DAMAGE_RESISTANCE);
@@ -122,6 +126,20 @@ public final class FatBurdenEffectHandler {
         }
     }
 
+    private static void refreshObesityDiseaseEffects(ServerPlayer player, int obesityValue, int obesityStageId) {
+        if (shouldApplyMildObesityDisease(obesityValue)) {
+            refreshEffect(player, ModStatusEffects.FATTY_LIVER_HOLDER, 0);
+        } else {
+            player.removeEffect(ModStatusEffects.FATTY_LIVER_HOLDER);
+        }
+
+        if (shouldApplySevereObesityDisease(obesityStageId)) {
+            refreshEffect(player, ModStatusEffects.CARDIOPULMONARY_BURDEN_HOLDER, 0);
+        } else {
+            player.removeEffect(ModStatusEffects.CARDIOPULMONARY_BURDEN_HOLDER);
+        }
+    }
+
     private static void refreshEffect(ServerPlayer player, Holder<MobEffect> effect, int targetAmplifier) {
         MobEffectInstance existingEffect = player.getEffect(effect);
         int existingAmplifier = existingEffect == null ? NO_EXISTING_EFFECT : existingEffect.getAmplifier();
@@ -135,6 +153,14 @@ public final class FatBurdenEffectHandler {
 
     static boolean shouldApplyBurdenEffects(int obesityStageId, boolean hasFatBurdenEffect) {
         return hasFatBurdenEffect || obesityStageId >= 3;
+    }
+
+    static boolean shouldApplyMildObesityDisease(int obesityValue) {
+        return obesityValue >= MILD_DISEASE_OBESITY;
+    }
+
+    static boolean shouldApplySevereObesityDisease(int obesityStageId) {
+        return obesityStageId >= 4;
     }
 
     static int resistanceAmplifierForStage(int obesityStageId) {
