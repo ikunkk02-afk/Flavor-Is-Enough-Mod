@@ -70,7 +70,8 @@ public final class FlavorHudRenderer {
 		}
 
 		while (editHudKey.consumeClick()) {
-			if (client.player != null && client.screen == null) {
+			if (client.player != null && client.screen == null
+					&& !ModEntityComponents.FLAVOR_PLAYER.get(client.player).isFunModeActivated()) {
 				client.setScreen(new FlavorHudEditScreen());
 			}
 		}
@@ -91,6 +92,11 @@ public final class FlavorHudRenderer {
 			return;
 		}
 
+		FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(client.player);
+		if (component.isFunModeActivated()) {
+			return;
+		}
+
 		FlavorClientConfig config = FlavorClientConfig.get();
 		if (!forceVisible && !config.isHudEnabled()) {
 			return;
@@ -98,7 +104,6 @@ public final class FlavorHudRenderer {
 
 		clampHudToScreen(context.guiWidth(), context.guiHeight(), true);
 
-		FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(client.player);
 		renderPanelScaled(context, config.getHudX(), config.getHudY(), config.getHudScale(), component);
 	}
 

@@ -45,33 +45,32 @@ public final class FunModeBuffScaler {
         FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
         int powerScore = component.getFunModePowerScore();
 
-        // Tier system: every 50 Big Stomach power points = 1 tier.
-        // Rare blocks add more points, so valuable meals make the player stronger faster.
+        // Main progression is unlimited for max health: every 50 Big Stomach power points = 1 tier.
+        // Health intentionally has no cap, so the vanilla heart rows can spill beyond the screen.
         int tier = powerScore / 50;
-        // Cap at tier 20 (1000 power points) to prevent overflow
-        tier = Math.min(tier, 20);
+        int cappedBuffTier = Math.min(tier, 20);
 
         // === Permanent Attribute Modifiers (health goes off screen!) ===
         applyHealthBoost(player, tier);
 
         // === Permanent Speed ===
-        applySpeedBoost(player, tier);
+        applySpeedBoost(player, cappedBuffTier);
 
         // === Permanent Damage Boost ===
-        applyDamageBoost(player, tier);
+        applyDamageBoost(player, cappedBuffTier);
 
         // === Permanent Armor ===
-        applyArmorBoost(player, tier);
+        applyArmorBoost(player, cappedBuffTier);
 
         // === Effect-based Buffs (refreshed each tick) ===
-        applyEffectBuffs(player, tier);
+        applyEffectBuffs(player, cappedBuffTier);
     }
 
     private static void applyHealthBoost(ServerPlayer player, int tier) {
         AttributeInstance healthAttr = player.getAttribute(Attributes.MAX_HEALTH);
         if (healthAttr == null) return;
 
-        // +4 per tier → at tier 20 = +80 max health → 100 total
+        // +4 max health per tier with no hard cap; high fun-mode power can push hearts off-screen.
         double bonus = tier * 4.0;
         updateModifier(healthAttr, HEALTH_MODIFIER_ID, bonus, AttributeModifier.Operation.ADD_VALUE);
     }

@@ -2,6 +2,7 @@ package com.ikunkk02.flavorisenough.exercise;
 
 import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
+import com.ikunkk02.flavorisenough.funmode.FunModeHandler;
 import com.ikunkk02.flavorisenough.scale.PlayerBodyScaleHandler;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.network.chat.Component;
@@ -43,7 +44,7 @@ public final class ExerciseHandler {
 
     private static void onServerTick(net.minecraft.server.MinecraftServer server) {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            if (player.isSpectator() || player.isCreative()) {
+            if (player.isSpectator() || player.isCreative() || FunModeHandler.isFunModeActive(player)) {
                 continue;
             }
 

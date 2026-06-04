@@ -7,7 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,6 +39,19 @@ public class FunModeClientUseItemMixin {
         // Check if fun mode is activated for this player
         if (!ModEntityComponents.FLAVOR_PLAYER.get(player).isFunModeActivated()) {
             return;
+        }
+
+        // If the crosshair is on a block and the player is holding a block item,
+        // do not make it edible on the client. This preserves vanilla placement:
+        // aim at a block = place, aim into air = eat the held block/item.
+        if (mc.hitResult instanceof BlockHitResult && mc.hitResult.getType() == HitResult.Type.BLOCK) {
+            for (InteractionHand hand : InteractionHand.values()) {
+                ItemStack stack = player.getItemInHand(hand);
+                if (stack.getItem() instanceof BlockItem) {
+                    stack.remove(DataComponents.FOOD);
+                    return;
+                }
+            }
         }
 
         // Add synthetic FOOD data to non-food items so the client
