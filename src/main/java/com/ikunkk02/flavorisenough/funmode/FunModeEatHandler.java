@@ -5,11 +5,11 @@ import com.ikunkk02.flavorisenough.component.ModEntityComponents;
 import com.ikunkk02.flavorisenough.config.FlavorModConfig;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,16 +22,19 @@ public final class FunModeEatHandler {
     }
 
     public static void register() {
-        // Eat blocks instead of placing them
+        // Eat blocks with the vanilla use/eat animation instead of placing them.
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             if (!FlavorModConfig.get().funModeEnabled) return InteractionResult.PASS;
-            if (world.isClientSide()) return InteractionResult.PASS;
-            if (!FunModeHandler.isFunModeActive(player)) return InteractionResult.PASS;
+            FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
+            if (!component.isFunModeActivated()) return InteractionResult.PASS;
 
             ItemStack stack = player.getItemInHand(hand);
             if (stack.isEmpty()) return InteractionResult.PASS;
 
-            consumeItemAsFood(player, hand, stack);
+            if (!stack.has(DataComponents.FOOD)) {
+                stack.set(DataComponents.FOOD, FunModeRarity.syntheticFood(stack));
+            }
+            player.startUsingItem(hand);
             return InteractionResult.SUCCESS;
         });
 
@@ -65,27 +68,10 @@ public final class FunModeEatHandler {
                     SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0f, 0.8f);
 
             component.incrementFunModeFoodEaten();
+            component.addFunModePowerScore(entity.getType() == EntityType.WITHER ? 12 : 5);
             ModEntityComponents.FLAVOR_PLAYER.sync(player);
 
             return InteractionResult.SUCCESS;
         });
-    }
-
-    private static void consumeItemAsFood(Player player, InteractionHand hand, ItemStack stack) {
-        FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
-
-        // Give nutrition based on stack size (max stack = more filling)
-        int nutrition = 4 + Math.min(stack.getMaxStackSize() / 16, 4);
-        player.getFoodData().eat(nutrition, 0.6f);
-
-        // Consume one item
-        stack.shrink(1);
-
-        // Sound
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0f, 1.0f);
-
-        component.incrementFunModeFoodEaten();
-        ModEntityComponents.FLAVOR_PLAYER.sync(player);
     }
 }

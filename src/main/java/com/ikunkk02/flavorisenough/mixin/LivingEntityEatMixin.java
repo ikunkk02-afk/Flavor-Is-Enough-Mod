@@ -3,6 +3,7 @@ package com.ikunkk02.flavorisenough.mixin;
 import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
 import com.ikunkk02.flavorisenough.funmode.FunModeHandler;
+import com.ikunkk02.flavorisenough.funmode.FunModeRarity;
 import com.ikunkk02.flavorisenough.health.VanillaFoodHealthHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,10 +25,11 @@ public abstract class LivingEntityEatMixin {
 			// Apply vanilla food health tracking
 			VanillaFoodHealthHandler.applyVanillaFood(player, stack);
 
-			// Fun mode: increment food eaten counter
+			// Fun mode: count the bite and add rarity-based Big Stomach power.
 			if (FunModeHandler.isFunModeActive(player)) {
 				FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
 				component.incrementFunModeFoodEaten();
+				component.addFunModePowerScore(FunModeRarity.score(stack));
 				ModEntityComponents.FLAVOR_PLAYER.sync(player);
 			}
 		}

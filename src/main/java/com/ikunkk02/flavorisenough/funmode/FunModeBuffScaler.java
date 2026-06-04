@@ -43,11 +43,12 @@ public final class FunModeBuffScaler {
 
     public static void applyFunModeBuffs(ServerPlayer player) {
         FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
-        int foodEaten = component.getFunModeFoodEaten();
+        int powerScore = component.getFunModePowerScore();
 
-        // Tier system: every 50 items eaten = 1 tier
-        int tier = foodEaten / 50;
-        // Cap at tier 20 (1000 items) to prevent overflow
+        // Tier system: every 50 Big Stomach power points = 1 tier.
+        // Rare blocks add more points, so valuable meals make the player stronger faster.
+        int tier = powerScore / 50;
+        // Cap at tier 20 (1000 power points) to prevent overflow
         tier = Math.min(tier, 20);
 
         // === Permanent Attribute Modifiers (health goes off screen!) ===

@@ -2,19 +2,16 @@ package com.ikunkk02.flavorisenough.client.mixin;
 
 import com.ikunkk02.flavorisenough.component.ModEntityComponents;
 import com.ikunkk02.flavorisenough.config.FlavorModConfig;
+import com.ikunkk02.flavorisenough.funmode.FunModeRarity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Client-side mixin: makes all items appear edible to the client
@@ -46,15 +43,7 @@ public class FunModeClientUseItemMixin {
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack stack = player.getItemInHand(hand);
             if (!stack.isEmpty() && !stack.has(DataComponents.FOOD)) {
-                FoodProperties funFood = new FoodProperties(
-                        4,      // nutrition
-                        0.6f,   // saturation
-                        true,   // canAlwaysEat
-                        0.2f,   // eatSeconds — very fast eating
-                        Optional.empty(),
-                        List.of()
-                );
-                stack.set(DataComponents.FOOD, funFood);
+                stack.set(DataComponents.FOOD, FunModeRarity.syntheticFood(stack));
             }
         }
     }

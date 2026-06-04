@@ -26,6 +26,7 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private static final String LAST_WORKOUT_MESSAGE_TIME_KEY = "LastWorkoutMessageTime";
 	private static final String FUN_MODE_ACTIVATED_KEY = "FunModeActivated";
 	private static final String FUN_MODE_FOOD_EATEN_KEY = "FunModeFoodEaten";
+	private static final String FUN_MODE_POWER_SCORE_KEY = "FunModePowerScore";
 	private static final String FUN_MODE_OFFERING_COUNT_KEY = "FunModeOfferingCount";
 
 	private int flavorValue;
@@ -42,6 +43,7 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	private long lastWorkoutMessageTime;
 	private boolean funModeActivated;
 	private int funModeFoodEaten;
+	private int funModePowerScore;
 	private int funModeOfferingCount;
 
 	public int getFlavorValue() {
@@ -203,7 +205,23 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 	}
 
 	public void incrementFunModeFoodEaten() {
-		this.funModeFoodEaten++;
+		addFunModeFoodEaten(1);
+	}
+
+	public void addFunModeFoodEaten(int amount) {
+		this.funModeFoodEaten = Math.max(0, this.funModeFoodEaten + amount);
+	}
+
+	public int getFunModePowerScore() {
+		return funModePowerScore;
+	}
+
+	public void setFunModePowerScore(int score) {
+		this.funModePowerScore = Math.max(0, score);
+	}
+
+	public void addFunModePowerScore(int score) {
+		this.funModePowerScore = Math.max(0, this.funModePowerScore + score);
 	}
 
 	public int getFunModeOfferingCount() {
@@ -238,6 +256,9 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastWorkoutMessageTime = tag.getLong(LAST_WORKOUT_MESSAGE_TIME_KEY);
 		funModeActivated = tag.getBoolean(FUN_MODE_ACTIVATED_KEY);
 		funModeFoodEaten = tag.getInt(FUN_MODE_FOOD_EATEN_KEY);
+		funModePowerScore = tag.contains(FUN_MODE_POWER_SCORE_KEY)
+				? tag.getInt(FUN_MODE_POWER_SCORE_KEY)
+				: funModeFoodEaten;
 		funModeOfferingCount = tag.getInt(FUN_MODE_OFFERING_COUNT_KEY);
 	}
 
@@ -257,6 +278,7 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		tag.putLong(LAST_WORKOUT_MESSAGE_TIME_KEY, lastWorkoutMessageTime);
 		tag.putBoolean(FUN_MODE_ACTIVATED_KEY, funModeActivated);
 		tag.putInt(FUN_MODE_FOOD_EATEN_KEY, funModeFoodEaten);
+		tag.putInt(FUN_MODE_POWER_SCORE_KEY, funModePowerScore);
 		tag.putInt(FUN_MODE_OFFERING_COUNT_KEY, funModeOfferingCount);
 	}
 
@@ -276,6 +298,7 @@ public class FlavorPlayerComponent implements ComponentV3, CopyableComponent<Fla
 		lastWorkoutMessageTime = other.lastWorkoutMessageTime;
 		funModeActivated = other.funModeActivated;
 		funModeFoodEaten = other.funModeFoodEaten;
+		funModePowerScore = other.funModePowerScore;
 		funModeOfferingCount = other.funModeOfferingCount;
 	}
 
