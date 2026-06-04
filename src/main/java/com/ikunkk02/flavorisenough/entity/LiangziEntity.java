@@ -1,14 +1,10 @@
 package com.ikunkk02.flavorisenough.entity;
 
-import com.ikunkk02.flavorisenough.component.FlavorPlayerComponent;
-import com.ikunkk02.flavorisenough.component.ModEntityComponents;
-import com.ikunkk02.flavorisenough.config.FlavorModConfig;
-import com.ikunkk02.flavorisenough.funmode.FunModeHandler;
+import com.ikunkk02.flavorisenough.funmode.FunModeActivationHandler;
 import com.ikunkk02.flavorisenough.item.ModItems;
 import com.ikunkk02.flavorisenough.sound.ModSounds;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -25,7 +21,6 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -35,14 +30,8 @@ import java.util.List;
 
 public class LiangziEntity extends PathfinderMob {
 
-    private static final int MEAT_MIN_NUTRITION = 3;
     private static final int TRADE_SOUND_COOLDOWN = 1200;
     private static final float TRADE_SOUND_VOLUME = 0.35F;
-    private static final int OFFERING_REQUIRED = 128; // 2 stacks = 128
-
-    private static final Component FUN_MODE_UNLOCKED_MESSAGE = Component.translatable("message.flavor-is-enough-mod.fun_mode_unlocked");
-    private static final Component FUN_MODE_OFFERING_PROGRESS = Component.translatable("message.flavor-is-enough-mod.fun_mode_offering_progress");
-    private static final Component FUN_MODE_NOT_ENABLED = Component.translatable("message.flavor-is-enough-mod.fun_mode_not_enabled");
 
     private int lastTradeSoundTick = -TRADE_SOUND_COOLDOWN;
 
@@ -75,65 +64,16 @@ public class LiangziEntity extends PathfinderMob {
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
 
+        if (player.isShiftKeyDown()) {
+            if (!this.level().isClientSide() && player instanceof ServerPlayer serverPlayer) {
+                FunModeActivationHandler.handleSneakInteract(serverPlayer, this);
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
+        }
+
         if (isMeat(held)) {
             if (!this.level().isClientSide() && player instanceof ServerPlayer serverPlayer) {
-                if (!FlavorModConfig.get().funModeEnabled) {
-                    // Fun mode not enabled in config — act as normal food trader
-                    tradeMeatForFood(serverPlayer, held);
-                    return InteractionResult.sidedSuccess(false);
-                }
-
-                FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(serverPlayer);
-
-                if (component.isFunModeActivated()) {
-                    // Already unlocked — act as normal food trader
-                    tradeMeatForFood(serverPlayer, held);
-                    return InteractionResult.sidedSuccess(false);
-                }
-
-                // Count offering
-                int offered = component.getFunModeOfferingCount();
-                offered++;
-                component.setFunModeOfferingCount(offered);
-                held.shrink(1);
-
-                int required = FlavorModConfig.get().funModeOfferingRequired;
-
-                if (offered >= required) {
-                    // FUN MODE UNLOCKED!
-                    FunModeHandler.activateFunMode(serverPlayer);
-                    serverPlayer.displayClientMessage(FUN_MODE_UNLOCKED_MESSAGE, false);
-
-                    ServerLevel serverLevel = (ServerLevel) this.level();
-                    serverLevel.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,
-                            this.getX(), this.getY() + this.getBbHeight() + 1.0D, this.getZ(),
-                            100, 1.0D, 1.0D, 1.0D, 0.5D);
-                    serverLevel.sendParticles(ParticleTypes.HEART,
-                            this.getX(), this.getY() + this.getBbHeight() + 1.0D, this.getZ(),
-                            50, 1.5D, 1.5D, 1.5D, 0.3D);
-                    this.playSound(SoundEvents.TOTEM_USE, 1.0F, 1.0F);
-                    this.playSound(ModSounds.LIANGZI_TRADE, TRADE_SOUND_VOLUME, 1.0F);
-                } else {
-                    // Show progress
-                    int remaining = required - offered;
-                    serverPlayer.displayClientMessage(
-                            Component.translatable("message.flavor-is-enough-mod.fun_mode_offering_progress", offered, required, remaining),
-                            true);
-
-                    ServerLevel serverLevel = (ServerLevel) this.level();
-                    serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER,
-                            this.getX(), this.getY() + this.getBbHeight() + 0.5D, this.getZ(),
-                            8, 0.3D, 0.2D, 0.3D, 0.0D);
-                    this.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-
-                    int tick = this.tickCount;
-                    if (tick - lastTradeSoundTick >= TRADE_SOUND_COOLDOWN) {
-                        this.playSound(ModSounds.LIANGZI_TRADE, TRADE_SOUND_VOLUME, 1.0F);
-                        lastTradeSoundTick = tick;
-                    }
-                }
-
-                ModEntityComponents.FLAVOR_PLAYER.sync(serverPlayer);
+                tradeMeatForFood(serverPlayer, held);
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide());
         }
@@ -162,8 +102,7 @@ public class LiangziEntity extends PathfinderMob {
     }
 
     private static boolean isMeat(ItemStack stack) {
-        FoodProperties food = stack.get(DataComponents.FOOD);
-        return food != null && food.nutrition() >= MEAT_MIN_NUTRITION;
+        return FunModeActivationHandler.isMeat(stack);
     }
 
     private ItemStack getRandomReward() {
