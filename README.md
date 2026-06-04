@@ -8,7 +8,7 @@
 
 Flavor Is Enough adds a dynamic **Flavor → Obesity → Health** system to Minecraft. Every food you eat — whether from the mod or vanilla — affects your body shape, movement speed, and visual appearance. Eat too much junk and you'll grow wider, slower, and visibly heavier. Exercise to slim back down.
 
-New in this update: meet **良子 (Liangzi)** himself — a wandering NPC you can feed for mod rewards, and who'll keep you company with his signature voice lines.
+New in this update: **趣味玩法 (Fun Mode)** — unlock the ultimate mukbang fantasy! Eat blocks, items, even mobs to grow infinitely stronger. Rare materials give more power. Also meet **良子 (Liangzi)** — a wandering NPC you can feed for mod rewards, and the gatekeeper who unlocks Fun Mode.
 
 ### Core Loop
 
@@ -33,6 +33,47 @@ A wandering NPC themed after the mukbang streamer 良子大胃袋, found natural
 | **Behavior** | Wanders, looks at players, picks up and eats nearby food drops |
 | **Trade** | Right-click with meat (nutrition ≥3) → consumes meat, drops random mod food (1–2x) |
 | **Voice** | Custom sound effects play randomly during trades and ambient idle (5s cooldown on trade spam) |
+
+### 🎮 Fun Mode (趣味玩法) — Eat Everything!
+
+Once enabled in config and unlocked via Liangzi, Fun Mode transforms the game into a mukbang power fantasy.
+
+**Unlocking:**
+1. Enable `Fun Mode` in the mod config (ModMenu → Flavor Is Enough Mod → 趣味玩法开关)
+2. Find 良子, **sneak + right-click** him
+3. Click `[确认上交两组肉类]` in the confirmation dialog — consumes 128 meat items
+4. You'll be notified: Fun Mode is active!
+
+**What you can do:**
+| Action | Effect |
+|--------|--------|
+| Right-click air with any item | Eat it with eating animation (not instant!) |
+| Right-click a mob | Bite it for damage (+ eat to grow stronger) |
+| Place blocks normally | Aiming at a block still places it — no accidental eating |
+
+**Rarity Power System (5 tiers):**
+
+| Tier | Score | Examples | Eat Time |
+|------|-------|----------|----------|
+| Common (普通) | +1 | Dirt, stone, wood, sand | 0.8s |
+| Useful (实用) | +3 | Iron, copper, coal, redstone, quartz | 1.0s |
+| Rare (稀有) | +8 | Diamond, emerald, gold, obsidian | 1.4s |
+| Special (特殊) | +12 | Ancient debris, crying obsidian, end stone | 1.8s |
+| Godlike (神级) | +25 | Dragon egg, netherite block, beacon | 2.4s |
+
+**Scaling (every 50 power = 1 tier):**
+| Buff | Formula | Cap |
+|------|---------|-----|
+| Max Health | +4 per tier | ♾️ UNLIMITED — hearts go off-screen! |
+| Speed | +1% per tier | 20 tiers |
+| Attack Damage | +1 per tier | 20 tiers |
+| Armor | +1 per tier | 20 tiers |
+| Effects | Resistance, Regen, Fire Res, Night Vision, Strength, Haste, Absorption | Unlocks at tier thresholds |
+
+**Quality of life in Fun Mode:**
+- The mod HUD panel auto-hides (no clutter)
+- Exercise prompts stop (you're too powerful to need workouts)
+- Obesity/debuff system is disabled (no drawbacks — just pure power)
 
 ### Body Scale System (Continuous)
 
@@ -151,7 +192,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 味真足模组为 Minecraft 引入了一套动态的**「味真足 → 肥胖 → 健康」**数值系统。你吃的每一口食物——无论是模组自定义还是原版——都会实时影响你的体型、移动速度和外观。吃太多垃圾食品会让你变宽变慢；运动则能帮你瘦回来。
 
-新版加入：**良子 NPC** — 可在野外遇到的吃播 NPC，喂肉食可换模组食物，还会用招牌语音陪你唠嗑。
+新版加入：**趣味玩法** — 解锁终极吃播幻想！吃方块、物品甚至生物，越吃越强，稀有材料给更多力量，血量无上限堆到出屏！还有 **良子 NPC** — 野外遇到的吃播 NPC，喂肉食换模组食物，也是解锁趣味玩法的守门人。
 
 核心循环：**吃东西 → 数值变化 → Pehkui 体型缩放 → 运动恢复**
 
@@ -172,6 +213,47 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 | **行为** | 闲逛、注视玩家、捡地上食物吃 |
 | **交易** | 右键持肉食（营养值 ≥3）→ 消耗肉食，掉落随机模组食物（1–2个） |
 | **语音** | 喂食和空闲时随机播放良子语音（喂食5秒冷却防刷屏） |
+
+### 🎮 趣味玩法 — 吃万物变强！
+
+在配置中开启并通过良子解锁后，趣味玩法将 Minecraft 变成吃播力量幻想。
+
+**解锁流程：**
+1. 模组设置中开启「趣味玩法开关」（ModMenu → Flavor Is Enough Mod）
+2. 找到良子，**蹲下 + 右键** 点击他
+3. 在弹出的确认框中点击 `[确认上交两组肉类]` — 消耗 128 个肉类
+4. 系统提示：趣味模式已开启！
+
+**你可以做的事：**
+| 操作 | 效果 |
+|------|------|
+| 对着空气右键任意物品 | 进入吃东西动画，吃完后获得力量分 |
+| 右键点击生物 | 咬一口造成伤害，吃完获得力量分 |
+| 正常放置方块 | 准心指着方块时优先放置，不会误吃 |
+
+**稀有度力量分（5档）：**
+
+| 档位 | 分数 | 例子 | 进食时间 |
+|------|------|------|----------|
+| 普通 | +1 | 泥土、石头、木头、沙子 | 0.8秒 |
+| 实用 | +3 | 铁、铜、煤、红石、石英 | 1.0秒 |
+| 稀有 | +8 | 钻石、绿宝石、金、黑曜石 | 1.4秒 |
+| 特殊 | +12 | 远古残骸、哭泣黑曜石、末地石 | 1.8秒 |
+| 神级 | +25 | 龙蛋、下界合金块、信标 | 2.4秒 |
+
+**成长体系（每 50 分 = 1 级）：**
+| 增益 | 公式 | 上限 |
+|------|------|------|
+| 最大生命值 | 每级 +4 | ♾️ 无上限 — 心直接堆出屏幕！ |
+| 移动速度 | 每级 +1% | 20 级封顶 |
+| 攻击力 | 每级 +1 | 20 级封顶 |
+| 护甲 | 每级 +1 | 20 级封顶 |
+| 药水效果 | 抗性、再生、防火、夜视、力量、急迫、伤害吸收 | 随级解锁 |
+
+**趣味模式下的便捷体验：**
+- 模组 HUD 面板自动隐藏（不遮挡视线）
+- 运动提示停止（你已经强到不需要锻炼了）
+- 肥胖/负面效果系统禁用（只有纯粹的爽）
 
 ### 体型缩放（连续线性）
 
