@@ -26,7 +26,9 @@ public final class FunModeEatHandler {
             if (!FunModeHandler.isFunModeActive(player)) return InteractionResult.PASS;
             if (!(entity instanceof LivingEntity living)) return InteractionResult.PASS;
             if (entity instanceof Player) return InteractionResult.PASS;
-            if (entity.getType() == EntityType.ENDER_DRAGON) return InteractionResult.PASS;
+            if (entity.getType() == EntityType.ENDER_DRAGON && !FlavorModConfig.get().canEatEnderDragon) {
+                return InteractionResult.PASS;
+            }
 
             // Bite damage follows the same rarity power progression as block eating.
             FlavorPlayerComponent component = ModEntityComponents.FLAVOR_PLAYER.get(player);
@@ -49,7 +51,15 @@ public final class FunModeEatHandler {
                     SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0f, 0.8f);
 
             component.incrementFunModeFoodEaten();
-            component.addFunModePowerScore(entity.getType() == EntityType.WITHER ? 12 : 5);
+            int entityScore;
+            if (entity.getType() == EntityType.ENDER_DRAGON) {
+                entityScore = 25; // godlike — the ultimate meal
+            } else if (entity.getType() == EntityType.WITHER) {
+                entityScore = 12;
+            } else {
+                entityScore = 5;
+            }
+            component.addFunModePowerScore(entityScore);
             ModEntityComponents.FLAVOR_PLAYER.sync(player);
 
             return InteractionResult.SUCCESS;

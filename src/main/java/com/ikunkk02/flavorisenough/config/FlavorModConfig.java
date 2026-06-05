@@ -17,6 +17,9 @@ public class FlavorModConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 1, max = 256)
     public int funModeOfferingRequired = 128;
 
+    @ConfigEntry.Gui.Tooltip
+    public boolean canEatEnderDragon = false;
+
     public static FlavorModConfig get() {
         return AutoConfig.getConfigHolder(FlavorModConfig.class).getConfig();
     }

@@ -28,6 +28,8 @@
   "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled.@Tooltip": "开启后，良子 NPC 将接受肉类上供，积累后可解锁「大胃袋」趣味模式",
   "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired": "上供肉类数量",
   "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired.@Tooltip": "解锁趣味玩法需要的肉类数量（默认128=2组）",
+  "text.autoconfig.flavor-is-enough-mod.option.canEatEnderDragon": "可吃末影龙",
+  "text.autoconfig.flavor-is-enough-mod.option.canEatEnderDragon.@Tooltip": "开启后，趣味模式下可以右键啃食末影龙（默认关闭）",
   "message.flavor-is-enough-mod.fun_mode_confirm_question": "良子：是否上交 %d 个肉类来开启趣味模式？你当前拥有 %d 个符合条件的肉类。",
   "message.flavor-is-enough-mod.fun_mode_confirm_button": "[确认上交两组肉类]",
   "message.flavor-is-enough-mod.fun_mode_cancel_button": "[暂不开启]",

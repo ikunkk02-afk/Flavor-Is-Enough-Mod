@@ -28,6 +28,8 @@
   "text.autoconfig.flavor-is-enough-mod.option.funModeEnabled.@Tooltip": "When enabled, the Liangzi NPC will accept meat offerings to unlock the 'Big Stomach' fun mode",
   "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired": "Offering Requirement",
   "text.autoconfig.flavor-is-enough-mod.option.funModeOfferingRequired.@Tooltip": "Number of meat items required to unlock fun mode (default: 128 = 2 stacks)",
+  "text.autoconfig.flavor-is-enough-mod.option.canEatEnderDragon": "Eat Ender Dragon",
+  "text.autoconfig.flavor-is-enough-mod.option.canEatEnderDragon.@Tooltip": "When enabled, allows biting the Ender Dragon in Fun Mode (off by default)",
   "message.flavor-is-enough-mod.fun_mode_confirm_question": "Liangzi: Hand over %d meat items to enable Fun Mode? You currently have %d eligible meat items.",
   "message.flavor-is-enough-mod.fun_mode_confirm_button": "[Confirm two stacks of meat]",
   "message.flavor-is-enough-mod.fun_mode_cancel_button": "[Not now]",
