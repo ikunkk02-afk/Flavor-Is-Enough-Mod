@@ -5,6 +5,7 @@ import com.ikunkk02.flavorisenough.funmode.FunModeRarity;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.protocol.game.ServerboundUseItemPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,14 +37,17 @@ public abstract class FunModeUseItemMixin {
             return;
         }
 
-        // If item already has food data, let vanilla handle it
-        if (stack.has(DataComponents.FOOD)) {
-            return;
+        FoodProperties existing = stack.get(DataComponents.FOOD);
+        if (existing != null) {
+            // Already food — force canAlwaysEat so full-hunger eating works
+            if (!existing.canAlwaysEat()) {
+                stack.set(DataComponents.FOOD, FunModeRarity.makeAlwaysEdible(existing));
+            }
+        } else {
+            // Not food — add synthetic food data so vanilla eating system can process it.
+            // Rarer blocks take longer to eat and give more nutrition/saturation.
+            stack.set(DataComponents.FOOD, FunModeRarity.syntheticFood(stack));
         }
-
-        // Add synthetic food data so vanilla eating system can process it.
-        // Rarer blocks take longer to eat and give more nutrition/saturation.
-        stack.set(DataComponents.FOOD, FunModeRarity.syntheticFood(stack));
 
         // Let vanilla proceed — it will now find food data and call startUsingItem()
     }

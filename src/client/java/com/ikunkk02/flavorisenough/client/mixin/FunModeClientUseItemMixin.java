@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
@@ -54,11 +55,22 @@ public class FunModeClientUseItemMixin {
             }
         }
 
-        // Add synthetic FOOD data to non-food items so the client
-        // thinks they're edible and sends the "use item" packet
+        // Add synthetic FOOD data to non-food items, and force canAlwaysEat
+        // on existing food so the client sends the "use item" packet even
+        // when the player's hunger bar is full.
         for (InteractionHand hand : InteractionHand.values()) {
             ItemStack stack = player.getItemInHand(hand);
-            if (!stack.isEmpty() && !stack.has(DataComponents.FOOD)) {
+            if (stack.isEmpty()) {
+                continue;
+            }
+            FoodProperties existing = stack.get(DataComponents.FOOD);
+            if (existing != null) {
+                // Already food — force canAlwaysEat so full-hunger eating works
+                if (!existing.canAlwaysEat()) {
+                    stack.set(DataComponents.FOOD, FunModeRarity.makeAlwaysEdible(existing));
+                }
+            } else {
+                // Not food — add synthetic FOOD
                 stack.set(DataComponents.FOOD, FunModeRarity.syntheticFood(stack));
             }
         }

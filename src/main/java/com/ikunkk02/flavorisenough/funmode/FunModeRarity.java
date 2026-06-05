@@ -74,6 +74,21 @@ public final class FunModeRarity {
         return 0.8F;
     }
 
+    /**
+     * Preserves existing food values but forces {@code canAlwaysEat = true},
+     * so normal food can be eaten in fun mode even with full hunger.
+     */
+    public static FoodProperties makeAlwaysEdible(FoodProperties original) {
+        return new FoodProperties(
+            original.nutrition(),
+            original.saturation(),
+            true,  // force canAlwaysEat
+            original.eatSeconds(),
+            original.usingConvertsTo(),
+            original.effects()
+        );
+    }
+
     public static String tierName(int score) {
         if (score >= GODLIKE_SCORE) {
             return "godlike";
